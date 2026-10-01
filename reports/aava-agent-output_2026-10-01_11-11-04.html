@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>User Scenarios</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy-deep:#0d1f3c;--navy-row:#1a2e55;
+  --border:#dde4f0;--border-dark:rgba(255,255,255,0.1);
+  --text-white:#fff;--text-light:rgba(255,255,255,0.75);--text-muted:rgba(255,255,255,0.45);
+  --text-dark:#0f172a;--text-mid:#334155;--text-soft:#64748b;
+  --bg-page:#f8fafc;--bg-white:#fff;
+  --indigo:#3d5a99;--indigo-lt:#dce6f5;--indigo-xlt:#eef3fb;
+  --font-head:'DM Sans',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+body{font-family:var(--font-body);background:var(--bg-page);color:var(--text-dark);line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:860px;margin:0 auto;background:var(--bg-white);box-shadow:0 2px 24px rgba(13,31,60,.10)}
+/* HERO */
+.hero{background:var(--navy-deep);padding:44px 52px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;border-radius:50%;background:rgba(61,90,153,.12);pointer-events:none}
+.hero-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;background:var(--navy-row);color:#6c8eea;border:1px solid rgba(108,142,234,.3);padding:4px 12px;border-radius:4px;margin-bottom:18px}
+.hero h1{font-family:var(--font-head);font-size:36px;font-weight:700;color:var(--text-white);line-height:1.15;margin-bottom:10px;position:relative;z-index:1}
+.hero-meta{display:flex;gap:0;flex-wrap:wrap;padding-top:22px;border-top:1px solid rgba(255,255,255,.10);margin-top:24px}
+.hero-meta-item{padding-right:32px;margin-right:32px;border-right:1px solid rgba(255,255,255,.10)}
+.hero-meta-item:last-child{border-right:none;margin-right:0}
+.hml{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#6c8eea;margin-bottom:4px}
+.hmv{font-family:var(--font-head);font-size:13px;font-weight:600;color:rgba(255,255,255,.88)}
+/* BODY */
+.body-wrap{padding:48px 52px 64px;display:flex;flex-direction:column;gap:0}
+/* USER TYPE BLOCK */
+.user-type-block{margin-bottom:48px}
+.user-type-block
+.user-type-header{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding-bottom:14px;border-bottom:2px solid var(--indigo-lt)}
+.user-type-name{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--navy-deep)}
+.user-name-chip{font-family:var(--font-head);font-size:13px;font-weight:500;color:var(--indigo);background:var(--indigo-xlt);border:1px solid var(--indigo-lt);border-radius:20px;padding:3px 12px;white-space:nowrap}
+/* SCENARIO ITEMS */
+.scenario-item{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.scenario-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.scenario-header{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.scenario-num{font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo);white-space:nowrap;flex-shrink:0}
+.scenario-title{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--navy-deep);line-height:1.3}
+.scenario-desc{font-family:var(--font-body);font-size:13.5px;color:var(--text-mid);line-height:1.75}
+/* INSERT */
+.insert{display:none}
+.insert-dark{display:none}
+/* FOOTER */
+.footer{background:var(--navy-deep);padding:13px 52px;display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.35)}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="hero">
+  <div class="hero-tag">User Scenarios</div>
+  <h1><span class="insert-dark">INSERT: document title e.g. "User Scenarios — [Project Name]"</span></h1>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><div class="hml">Project</div><div class="hmv"><span class="insert-dark">INSERT: project name</span></div></div>
+    <div class="hero-meta-item"><div class="hml">Client</div><div class="hmv"><span class="insert-dark">INSERT: client name</span></div></div>
+    <div class="hero-meta-item"><div class="hml">User Type</div><div class="hmv"><span class="insert-dark">INSERT: user type from roadmap</span></div></div>
+    <div class="hero-meta-item"><div class="hml">Experience(s)</div><div class="hmv"><span class="insert-dark">INSERT: experience name(s) being processed</span></div></div>
+    <div class="hero-meta-item"><div class="hml">Scenarios</div><div class="hmv"><span class="insert-dark">INSERT: N (consolidated count)</span></div></div>
+  </div>
+</div>
+<div class="body-wrap">
+  <!-- USER TYPE BLOCK — Single user type from the roadmap -->
+  <div class="user-type-block">
+    <div class="user-type-header">
+      <span class="user-type-name"><span class="insert">INSERT: user type</span></span>
+      <span class="user-name-chip"><span class="insert">INSERT: user name — first letter matches role</span></span>
+    </div>
+<!-- CONSOLIDATED SCENARIO 1 -->
+<div class="scenario-item">
+  <div class="scenario-header">
+    <span class="scenario-num">Scenario 1:</span>
+    <span class="scenario-title"><span class="insert">INSERT: consolidated scenario title — represents unified intent, not a single channel</span></span>
+  </div>
+  <p class="scenario-desc"><span class="insert">INSERT: 2-3 sentence description. [WHO + Situation + Channel/Method Variations] + [Goal + Success Criteria with directional measure]. No UI steps.</span></p>
+</div>
+<!-- CONSOLIDATED SCENARIO 2 -->
+<div class="scenario-item">
+  <div class="scenario-header">
+    <span class="scenario-num">Scenario 2:</span>
+    <span class="scenario-title"><span class="insert">INSERT: consolidated scenario title</span></span>
+  </div>
+  <p class="scenario-desc"><span class="insert">INSERT: 2-3 sentence consolidated description with channel variations</span></p>
+</div>
+<!-- CONSOLIDATED SCENARIO 3 -->
+<div class="scenario-item">
+  <div class="scenario-header">
+    <span class="scenario-num">Scenario 3:</span>
+    <span class="scenario-title"><span class="insert">INSERT: consolidated scenario title</span></span>
+  </div>
+  <p class="scenario-desc"><span class="insert">INSERT: 2-3 sentence consolidated description</span></p>
+</div>
+<!-- INSERT: Add more .scenario-item blocks for additional consolidated scenarios -->
+  </div>
+</div>
+<div class="footer">
+  <span>User Scenarios · Confidential</span>
+  <span>Internal Reference</span>
+</div>
+</div>
+</body>
+</html>
