@@ -1,0 +1,679 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Consolidated Workflow</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <style>
+    *,*::before,*::after{
+      box-sizing:border-box;
+      margin:0;
+      padding:0
+    }
+    :root{
+      --navy-deep:#0d1f3c;
+      --navy-row:#1a2e55;
+      --navy-mid:#1a3f6a;
+      --screen-bg:#dce8f5;
+      --screen-border:#9ab5d0;
+      --subscreen-bg:#ffffff;
+      --subscreen-border:#a8c0d8;
+      --border:#dde4f0;
+      --border-light:#dde6f0;
+      --border-dark:rgba(255,255,255,0.1);
+      --arrow:#587f94;
+      --text-white:#fff;
+      --text-light:rgba(255,255,255,0.75);
+      --text-muted:rgba(255,255,255,0.45);
+      --text-dark:#0f172a;
+      --text-mid:#334155;
+      --text-soft:#64748b;
+      --bg-page:#f8fafc;
+      --bg-white:#fff;
+      --indigo:#3d5a99;
+      --indigo-lt:#dce6f5;
+      --font-head:'DM Sans',sans-serif;
+      --font-body:'Inter',sans-serif;
+      --font-mono:'IBM Plex Mono',monospace;
+    }
+    body{
+      font-family:var(--font-body);
+      background:var(--bg-page);
+      color:var(--text-dark);
+      line-height:1.6
+    }
+    .insert{
+      display:none
+    }
+    .insert-dark{
+      display:none
+    }
+    /* HERO */
+    .hero{
+      background:var(--navy-deep);
+      padding:56px 64px 48px;
+      position:relative;
+      overflow:hidden
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      right:-80px;
+      top:-80px;
+      opacity:0.08;
+      background:#3b82f6
+    }
+    .hero-tag{
+      display:inline-block;
+      font-family:var(--font-head);
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      background:#2563eb;
+      color:var(--text-white);
+      padding:4px 12px;
+      border-radius:3px;
+      margin-bottom:20px
+    }
+    .hero h1{
+      font-family:var(--font-head);
+      font-size:42px;
+      font-weight:700;
+      color:var(--text-white);
+      line-height:1.1;
+      margin-bottom:16px
+    }
+    .hero-subtitle{
+      font-size:14px;
+      font-weight:300;
+      color:var(--text-light);
+      line-height:1.65;
+      max-width:560px;
+      margin-bottom:36px
+    }
+    .hero-meta{
+      display:flex;
+      gap:48px;
+      padding-top:24px;
+      border-top:1px solid var(--border-dark);
+      flex-wrap:wrap
+    }
+    .hero-meta-label{
+      font-size:9.5px;
+      font-weight:600;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      color:var(--text-muted);
+      margin-bottom:6px
+    }
+    .hero-meta-value{
+      font-family:var(--font-head);
+      font-size:13px;
+      font-weight:600;
+      color:rgba(255,255,255,0.88)
+    }
+    /* USER TYPE BAR */
+    .user-type-bar{
+      background:var(--navy-mid);
+      padding:12px 36px;
+      font-family:var(--font-head);
+      font-size:13px;
+      font-weight:600;
+      color:rgba(255,255,255,0.85);
+      letter-spacing:0.04em
+    }
+    /* FULL-WIDTH CANVAS - one swimlane per Owner/User Type */
+    .canvas-full{
+      padding:36px 40px;
+      overflow-x:auto;
+      border-bottom:2px solid var(--border-light)
+    }
+    .swimlane{
+      margin-bottom:32px
+    }
+    .swimlane:last-child{
+      margin-bottom:0
+    }
+    .swimlane-label{
+      font-family:var(--font-head);
+      font-size:12px;
+      font-weight:700;
+      color:var(--text-soft);
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      margin-bottom:14px
+    }
+    .flow{
+      display:flex;
+      align-items:flex-start;
+      gap:0;
+      min-width:max-content
+    }
+    .screen-col{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:0;
+      min-width:200px;
+      max-width:220px
+    }
+    .screen-id{
+      font-family:var(--font-body);
+      font-size:11px;
+      font-weight:500;
+      color:var(--text-soft);
+      margin-bottom:8px;
+      align-self:flex-start;
+      padding-left:2px
+    }
+    .screen-box{
+      width:100%;
+      background:var(--screen-bg);
+      border:2px solid var(--screen-border);
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:110px;
+      padding:18px 12px
+    }
+    .screen-box.sub{
+      background:var(--subscreen-bg);
+      border:1.5px solid var(--subscreen-border)
+    }
+    .screen-box-label{
+      font-family:var(--font-head);
+      font-size:18px;
+      font-weight:600;
+      color:var(--text-dark);
+      text-align:center;
+      line-height:1.2
+    }
+    /* Badges - replace separately-routed sub/pop-up/error/branch/handoff boxes */
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:10px;
+      justify-content:center
+    }
+    .badge{
+      font-family:var(--font-body);
+      font-size:10px;
+      font-weight:600;
+      padding:3px 9px;
+      border-radius:20px;
+      white-space:nowrap
+    }
+    .badge-sub{
+      background:var(--indigo-lt);
+      color:var(--indigo)
+    }
+    .badge-popup{
+      background:#fefce8;
+      color:#854d0e;
+      border:1px solid #fde68a
+    }
+    .badge-error{
+      background:#fef2f2;
+      color:#991b1b;
+      border:1px solid #fecaca
+    }
+    .badge-branch{
+      background:#f1f5f9;
+      color:var(--text-soft);
+      border:1px solid var(--border)
+    }
+    .badge-backward{
+      background:#f1f5f9;
+      color:var(--text-soft);
+      border:1px dashed var(--border)
+    }
+    .badge-handoff{
+      background:#eef2ff;
+      color:#4338ca;
+      border:1px solid #c7d2fe
+    }
+    .arrow-wrap{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:0 8px;
+      padding-top:55px;
+      flex-shrink:0
+    }
+    .arrow-label-text{
+      font-family:var(--font-body);
+      font-size:9.5px;
+      color:var(--arrow);
+      white-space:nowrap;
+      margin-bottom:4px;
+      text-align:center;
+      max-width:88px;
+      line-height:1.35
+    }
+    .arrow-h{
+      display:flex;
+      align-items:center
+    }
+    .arrow-line{
+      height:1.5px;
+      background:var(--arrow);
+      min-width:28px;
+      flex-shrink:0
+    }
+    .arrow-head{
+      width:0;
+      height:0;
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+      border-left:8px solid var(--arrow)
+    }
+    /* BELOW-CANVAS METADATA - two-column layout */
+    .meta-section{
+      padding:32px 36px;
+      border-bottom:2px solid var(--border-light)
+    }
+    .meta-grid{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:32px
+    }
+    .meta-left{
+      display:flex;
+      flex-direction:column;
+      gap:20px
+    }
+    /* Legend */
+    .legend{
+      display:flex;
+      flex-direction:column;
+      gap:10px
+    }
+    .legend-item{
+      display:flex;
+      align-items:center;
+      gap:12px
+    }
+    .legend-box{
+      width:34px;
+      height:20px;
+      border-radius:3px;
+      flex-shrink:0
+    }
+    .legend-box.unique{
+      background:var(--screen-bg);
+      border:1.5px solid var(--screen-border)
+    }
+    .legend-box.sub{
+      background:var(--subscreen-bg);
+      border:1.5px solid var(--subscreen-border)
+    }
+    .legend-box.popup{
+      background:#fefce8;
+      border:1.5px solid #fde68a
+    }
+    .legend-box.error{
+      background:#fef2f2;
+      border:1.5px solid #fecaca
+    }
+    .legend-arrow-icon{
+      width:34px;
+      height:2px;
+      background:var(--arrow);
+      position:relative;
+      flex-shrink:0
+    }
+    .legend-arrow-icon::after{
+      content:'';
+      position:absolute;
+      right:-1px;
+      top:-4px;
+      border:5px solid transparent;
+      border-left:7px solid var(--arrow);
+      border-right:none
+    }
+    .legend-label{
+      font-family:var(--font-body);
+      font-size:12px;
+      color:var(--text-mid)
+    }
+    /* Screen count */
+    .screen-count{
+      border:1px solid var(--border-light);
+      border-radius:6px;
+      overflow:hidden;
+      background:#fff
+    }
+    .screen-count-title{
+      font-family:var(--font-head);
+      font-size:11.5px;
+      font-weight:700;
+      color:var(--text-dark);
+      padding:10px 14px 8px;
+      border-bottom:1px solid var(--border-light)
+    }
+    .screen-count table{
+      width:100%;
+      border-collapse:collapse
+    }
+    .screen-count table tr{
+      border-bottom:1px solid #eef2f8
+    }
+    .screen-count table td{
+      font-family:var(--font-body);
+      font-size:11px;
+      padding:6px 14px;
+      color:var(--text-mid)
+    }
+    .screen-count table td:last-child{
+      text-align:right;
+      font-weight:600;
+      color:var(--text-dark)
+    }
+    .screen-count .total-row td{
+      font-family:var(--font-head);
+      font-weight:700;
+      font-size:11.5px;
+      color:var(--text-dark);
+      padding:8px 14px
+    }
+    /* Shared table styling - used for Screen Inventory, Screen Relationships, Cross-User Handoffs */
+    .tbl-block{
+      margin-bottom:28px
+    }
+    .tbl-block:last-child{
+      margin-bottom:0
+    }
+    .tbl-block-title{
+      font-family:var(--font-head);
+      font-size:14px;
+      font-weight:700;
+      color:var(--text-dark);
+      margin-bottom:12px
+    }
+    .tbl-wrap{
+      border:1px solid var(--border);
+      border-radius:6px;
+      overflow:hidden;
+      background:#fff
+    }
+    .dt{
+      width:100%;
+      border-collapse:collapse;
+      font-family:var(--font-body);
+      font-size:12px
+    }
+    .dt thead tr{
+      background:var(--navy-row)
+    }
+    .dt thead th{
+      font-family:var(--font-head);
+      font-size:9px;
+      font-weight:600;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      padding:9px 14px;
+      text-align:left
+    }
+    .dt tbody tr{
+      border-bottom:1px solid var(--border)
+    }
+    .dt tbody tr:nth-child(even){
+      background:#f8fafc
+    }
+    .dt tbody td{
+      padding:10px 14px;
+      vertical-align:top;
+      color:var(--text-dark);
+      line-height:1.5
+    }
+    /* Cross-user section - CONDITIONAL, now a table like the others */
+    .crossuser-section{
+      padding:32px 36px;
+      border-bottom:2px solid var(--border-light)
+    }
+    .crossuser-title{
+      font-family:var(--font-head);
+      font-size:16px;
+      font-weight:700;
+      color:var(--text-dark);
+      margin-bottom:16px
+    }
+    /* Conflict section - CONDITIONAL */
+    .conflict-section{
+      padding:32px 36px;
+      border-bottom:2px solid var(--border-light)
+    }
+    .conflict-title{
+      font-family:var(--font-head);
+      font-size:16px;
+      font-weight:700;
+      color:var(--text-dark);
+      margin-bottom:16px
+    }
+    .conflict-card{
+      border:1px solid #fecaca;
+      border-radius:6px;
+      background:#fff5f5;
+      padding:14px 16px;
+      margin-bottom:12px
+    }
+    .conflict-id{
+      font-family:var(--font-head);
+      font-size:11px;
+      font-weight:700;
+      color:#991b1b;
+      margin-bottom:6px
+    }
+    .conflict-desc{
+      font-size:12px;
+      color:var(--text-mid);
+      line-height:1.6;
+      margin-bottom:6px
+    }
+    .conflict-action{
+      font-size:11px;
+      color:var(--text-soft);
+      font-style:italic
+    }
+    /* Visualization Prompt section - mandatory, always present */
+    .vizprompt-section{
+      padding:32px 36px;
+      border-bottom:2px solid var(--border-light)
+    }
+    .vizprompt-title{
+      font-family:var(--font-head);
+      font-size:16px;
+      font-weight:700;
+      color:var(--text-dark);
+      margin-bottom:8px
+    }
+    .vizprompt-hint{
+      font-family:var(--font-body);
+      font-size:12px;
+      color:var(--text-soft);
+      margin-bottom:14px
+    }
+    .vizprompt-box{
+      border:1px solid var(--border);
+      border-radius:6px;
+      background:#f8fafc;
+      padding:18px 20px;
+      font-family:var(--font-mono);
+      font-size:11.5px;
+      line-height:1.7;
+      color:var(--text-mid);
+      white-space:pre-wrap;
+      word-wrap:break-word
+    }
+    /* Footer */
+    .footer{
+      background:var(--navy-deep);
+      border-top:1px solid var(--border-dark);
+      padding:14px 64px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+    .footer span{
+      font-size:11px;
+      color:var(--text-muted)
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HERO - standard design system -->
+    <div class="hero">
+      <div class="hero-tag">Consolidated Workflow</div>
+      <h1><span class="insert-dark">INSERT: "Consolidated Workflow - [Project Name]"</span></h1>
+      <p class="hero-subtitle"><span class="insert-dark">INSERT: brief description - all scenario workflows for the selected variation merged into a single structured screen and relationship dataset</span></p>
+      <div class="hero-meta">
+        <div><p class="hero-meta-label">Client</p><p class="hero-meta-value"><span class="insert-dark">INSERT: client name</span></p></div>
+        <div><p class="hero-meta-label">User Type</p><p class="hero-meta-value"><span class="insert-dark">INSERT: user type (persona name)</span></p></div>
+        <div><p class="hero-meta-label">Variation</p><p class="hero-meta-value"><span class="insert-dark">INSERT: e.g. "Variation 1"</span></p></div>
+        <div><p class="hero-meta-label">Scenarios Consolidated</p><p class="hero-meta-value"><span class="insert-dark">INSERT: N scenarios</span></p></div>
+        <div><p class="hero-meta-label">Total Screens</p><p class="hero-meta-value"><span class="insert-dark">INSERT: N total screens</span></p></div>
+      </div>
+    </div>
+    <!-- USER TYPE BAR -->
+    <div class="user-type-bar"><span class="insert-dark">INSERT: User Type(s) (Persona Name(s)) included in this consolidation</span></div>
+    <!-- FULL-WIDTH CANVAS - simplified rendering, one swimlane per Owner/User Type, generated ONLY from the tables below -->
+    <div class="canvas-full">
+      <!-- Repeat one .swimlane per Owner/User Type being consolidated -->
+      <div class="swimlane">
+        <p class="swimlane-label"><span class="insert">INSERT: Owner / User Type e.g. "Patient"</span></p>
+        <div class="flow">
+          <!-- SCREEN - primary path box; badges carry sub/pop-up/error/branch/handoff info, each sourced from a table row -->
+          <div class="screen-col">
+            <p class="screen-id"><span class="insert">INSERT: screen number</span>&nbsp;<span class="insert">INSERT: screen name</span></p>
+            <div class="screen-box"><span class="screen-box-label"><span class="insert">INSERT: screen name</span></span></div>
+            <div class="badges">
+              <span class="badge badge-sub insert">INSERT: e.g. "Sub: 8.1, 8.2" - only if sub-screens exist for this screen</span>
+              <span class="badge badge-popup insert">INSERT: e.g. "Pop-up: Pu.1" - only if a pop-up is attached</span>
+              <span class="badge badge-error insert">INSERT: e.g. "Error: OTP invalid" - only if an error state exists</span>
+              <span class="badge badge-branch insert">INSERT: e.g. "+1 branch - see table" - only if a secondary transition exists</span>
+              <span class="badge badge-handoff insert">INSERT: "-> Handoff: see table" - only if this screen has a cross-user handoff</span>
+            </div>
+          </div>
+          <!-- Arrow - one per primary transition; label = Action/CTA from the Screen Relationships Table -->
+          <div class="arrow-wrap">
+            <p class="arrow-label-text"><span class="insert">INSERT: CTA label</span></p>
+            <div class="arrow-h"><div class="arrow-line" style="min-width:36px;"></div><div class="arrow-head"></div></div>
+          </div>
+          <!-- Repeat .screen-col + .arrow-wrap for every screen in this swimlane's primary path -->
+        </div>
+      </div>
+      <!-- Repeat .swimlane for each additional Owner/User Type -->
+    </div>
+    <!-- BELOW-CANVAS METADATA - LEFT: count + legend - RIGHT: Screen Inventory + Screen Relationships tables -->
+    <div class="meta-section">
+      <div class="meta-grid">
+        <!-- LEFT COLUMN: Screen Count + Legend -->
+        <div class="meta-left">
+          <div class="screen-count">
+            <p class="screen-count-title">Screen Count</p>
+            <table>
+              <tr><td>No. of Unique Screens</td><td><span class="insert">INSERT</span></td></tr>
+              <tr><td>No. of Sub Screens</td><td><span class="insert">INSERT</span></td></tr>
+              <tr><td>No. of Pop Ups</td><td><span class="insert">INSERT</span></td></tr>
+              <tr><td>No. of Error States</td><td><span class="insert">INSERT</span></td></tr>
+              <tr class="total-row"><td>Total No. of Screens</td><td><span class="insert">INSERT</span></td></tr>
+            </table>
+          </div>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-box unique"></div><span class="legend-label">Unique Screens</span></div>
+            <div class="legend-item"><div class="legend-box sub"></div><span class="legend-label">Sub Screens</span></div>
+            <div class="legend-item"><div class="legend-box popup"></div><span class="legend-label">Pop-ups</span></div>
+            <div class="legend-item"><div class="legend-box error"></div><span class="legend-label">Error States</span></div>
+            <div class="legend-item"><div class="legend-arrow-icon"></div><span class="legend-label">Process flow</span></div>
+          </div>
+        </div>
+        <!-- RIGHT COLUMN: Screen Inventory + Screen Relationships tables - the authoritative output -->
+        <div>
+          <div class="tbl-block">
+            <p class="tbl-block-title">Screen Inventory</p>
+            <div class="tbl-wrap">
+              <table class="dt">
+                <thead><tr><th>Screen ID</th><th>Screen Name</th><th>Type</th><th>Owner</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="insert">INSERT: 1.0</span></td><td><span class="insert">INSERT: screen name</span></td><td><span class="insert">INSERT: Unique/Sub/PopUp/Error/Email</span></td><td><span class="insert">INSERT: Owner / User Type</span></td></tr>
+                  <!-- One row per unique screen - never repeat a Screen ID -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tbl-block">
+            <p class="tbl-block-title">Screen Relationships</p>
+            <div class="tbl-wrap">
+              <table class="dt">
+                <thead><tr><th>From Screen</th><th>Action / CTA</th><th>To Screen</th><th>Flow Type</th><th>Condition / Annotation</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="insert">INSERT: From Screen ID and Name, with Owner prefix if multiple Owners</span></td><td><span class="insert">INSERT: Action/CTA label</span></td><td><span class="insert">INSERT: To Screen ID and Name, with Owner prefix if multiple Owners</span></td><td><span class="insert">INSERT: Forward or Backward</span></td><td><span class="insert">INSERT: condition or annotation, or leave blank for a plain Forward click</span></td></tr>
+                  <!-- One row per unique (From Screen ID, Action/CTA, To Screen ID) - never repeat the same transition. Every cross-persona transition (different Owner on From vs To) must be its own row here. -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CROSS-USER HANDOFFS - CONDITIONAL: only when consolidating more than one User Type. Omit this entire block otherwise. -->
+    <div class="crossuser-section">
+      <p class="crossuser-title">Cross-User Handoffs</p>
+      <div class="tbl-wrap">
+        <table class="dt">
+          <thead><tr><th>From (User - Screen)</th><th>To (User - Screen)</th><th>Shared Entity</th><th>Data Passed</th></tr></thead>
+          <tbody>
+            <tr><td><span class="insert">INSERT: e.g. "Patient - 5.0 Appointment Details"</span></td><td><span class="insert">INSERT: e.g. "Doctor - 10.0 Dashboard"</span></td><td><span class="insert">INSERT: shared entity, e.g. "Appointment"</span></td><td><span class="insert">INSERT: what data moves across, and what changes as a result</span></td></tr>
+            <!-- One row per handoff -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- DESIGN CONFLICTS - CONDITIONAL: only when conflicting screen or transition definitions are detected during merge -->
+    <div class="conflict-section">
+      <p class="conflict-title">Design Conflicts</p>
+      <div class="conflict-card">
+        <p class="conflict-id"><span class="insert">INSERT: Conflict 1</span></p>
+        <p class="conflict-desc"><span class="insert">INSERT: description of conflicting screen or transition definitions across source scenarios</span></p>
+        <p class="conflict-action"><span class="insert">INSERT: recommended resolution action</span></p>
+      </div>
+      <!-- Add more conflict cards if needed -->
+    </div>
+    <!-- VISUALIZATION PROMPT - MANDATORY, always included, never conditional. Fixed text except the first line. -->
+    <div class="vizprompt-section">
+      <p class="vizprompt-title">Visualization Prompt (for Gemini)</p>
+      <p class="vizprompt-hint">Copy the tables above together with the prompt below and paste both into Gemini to generate the full diagram.</p>
+      <div class="vizprompt-box"><span class="insert">INSERT: one line only - "Consolidated Workflow for [Project Name], [User Type], [Variation]."</span>
+
+You are creating a single end to end workflow diagram from structured data. Use only the Screen Inventory table, the Screen Relationships table, and the Cross-User Handoffs table provided alongside this prompt as your data source. Do not invent, rename, or add any screen, action, or transition that is not present in those tables. Every From Screen and To Screen value already includes its Screen ID and Name, and an Owner prefix when more than one Owner is present, so use these exactly as given for card labels.
+
+Layout: group the primary path, meaning Unique screens only, in the order given by the Forward-type rows of the Screen Relationships table, into rows of five to six screens each. Give each row a short section heading naming the phase it covers, for example Primary Flow, then Continuation, then any further phase. Connect screens left to right within a row using solid arrows labeled with the Action or CTA text from the Screen Relationships table.
+
+Use the Flow Type column to decide arrow style everywhere in the diagram: draw every Forward transition as a solid blue arrow, and draw every Backward transition as a dashed gray arrow, including retries, cancels, and error recovery loops. Label every connecting line, forward or backward, with its Action or CTA text, so a line never appears unlabeled.
+
+When a transition's From Screen and To Screen have different Owners, meaning a cross-persona handoff, draw a connecting line directly between those two screens across their sections, styled by its Flow Type like any other transition, so the cross-persona flow is visible on the diagram itself and not only listed in the Cross-User Handoffs table.
+
+For every Sub, Pop-up, or Error screen attached to a primary screen through a From or To relationship pointing at it, draw it as a smaller card directly beneath that primary screen, connected by a short labeled line, using its Screen ID and Name, and connect it back into the primary flow using the Action or CTA and Condition / Annotation text from its relationship row.
+
+If a screen in the Screen Inventory table has no matching row in the Screen Relationships table, meaning no incoming or outgoing transition, do not force it into the main flow. Place it instead in a separate box labeled Additional Recovery States, from workflow inventory, to the side of the diagram, so nothing is silently dropped and nothing is force connected.
+
+Styling: primary screens use a light blue card, sub-screens use a light gray card, pop-ups use a light yellow card, error states use a light pink or red card. Include a small Workflow Summary box using the exact numbers from the Screen Count block, meaning Unique, Sub, Pop-up, Error, and Total. Include a legend explaining the four card colors and the two arrow types.
+
+For each screen card, add two to four short action bullets that plausibly summarize what a user does on that screen, based on the screen name and the Action or CTA labels connected to it in the Screen Relationships table. These bullets are illustrative labels only, not literal source content.
+
+Title the diagram using the User Type and a short description of the flow, and add a one line subtitle describing the start and end of the flow.</div>
+    </div>
+    <div class="footer">
+      <span>Consolidated Workflow - Confidential</span>
+      <span>Internal Reference</span>
+    </div>
+  </body>
+</html>
