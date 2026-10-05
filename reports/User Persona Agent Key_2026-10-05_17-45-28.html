@@ -1,0 +1,643 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Persona Cards</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    :root {
+      --navy-deep: #0d1f3c;
+      --navy-mid: #1a2d52;
+      --navy-light: #243660;
+      --accent: #7c3aed;
+      --accent-soft: #ede9fe;
+      --green-tag: #d1fae5;
+      --green-tag-text: #065f46;
+      --gold-bar: #c8a84b;
+      --border: #e2e8f0;
+      --border-soft: #f1f5f9;
+      --text-white: #ffffff;
+      --text-light: rgba(255,255,255,0.65);
+      --text-muted-dark: rgba(255,255,255,0.38);
+      --text-dark: #0f172a;
+      --text-mid: #334155;
+      --text-soft: #64748b;
+      --bg-card: #f8fafc;
+      --font-head: 'DM Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--font-body);
+      background: #eef2f7;
+      color: var(--text-dark);
+    }
+    /* -- INSERT chips ----------------------------------------------- */
+    .insert {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      font-style: italic;
+      color: #3b6ea8;
+      background: #e8f0fb;
+      border: 1px dashed #7aaade;
+      border-radius: 4px;
+      padding: 2px 7px;
+      line-height: 1.5;
+      white-space: normal;
+    }
+    .insert-dark {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      font-style: italic;
+      color: #90b8e8;
+      background: rgba(255,255,255,0.08);
+      border: 1px dashed rgba(144,184,232,0.5);
+      border-radius: 4px;
+      padding: 2px 7px;
+      line-height: 1.5;
+    }
+    .insert-name {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      font-style: italic;
+      color: #90b8e8;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px dashed rgba(144,184,232,0.5);
+      border-radius: 6px;
+      padding: 4px 12px;
+      line-height: 1.2;
+    }
+    .insert-tag {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      font-style: italic;
+      color: #065f46;
+      background: #d1fae5;
+      border: 1px dashed #6ee7b7;
+      border-radius: 20px;
+      padding: 3px 10px;
+      line-height: 1.5;
+    }
+    /* -- Page wrapper ----------------------------------------------- */
+    .page {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    /* -- Persona Card ----------------------------------------------- */
+    .persona-card {
+      display: flex;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(13,31,60,0.12);
+      min-height: 700px;
+    }
+    /* -- LEFT PANEL ------------------------------------------------- */
+    .panel-left {
+      width: 280px;
+      flex-shrink: 0;
+      background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
+      padding: 40px 28px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--navy-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      flex-shrink: 0;
+    }
+    .avatar svg {
+      opacity: 0.5;
+    }
+    .persona-name {
+      font-family: var(--font-head);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .persona-role {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted-dark);
+      margin-bottom: 20px;
+    }
+    /* Context Snapshot - displayed as quote block in left panel */
+    .persona-quote {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-style: italic;
+      color: var(--text-light);
+      line-height: 1.65;
+      border-left: 2px solid var(--gold-bar);
+      padding-left: 12px;
+      margin-bottom: 24px;
+    }
+    .type-badge {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--text-white);
+      padding: 5px 14px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+    .meta-block {
+      margin-bottom: 18px;
+    }
+    .meta-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted-dark);
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-white);
+      line-height: 1.4;
+    }
+    /* -- RIGHT PANEL ------------------------------------------------ */
+    .panel-right {
+      flex: 1;
+      background: var(--bg-card);
+      padding: 40px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      overflow: hidden;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+    }
+    /* Bar list - responsibilities, behaviours, tools */
+    .bar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bar-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .bar-accent {
+      width: 3px;
+      min-height: 100%;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      align-self: stretch;
+    }
+    .bar-gold {
+      background: var(--gold-bar);
+    }
+    .bar-green {
+      background: #10b981;
+    }
+    .bar-blue {
+      background: #3b82f6;
+    }
+    .bar-purple {
+      background: #8b5cf6;
+    }
+    .bar-text {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    /* Two-column split - goals + pains */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    /* Goals - pill tags */
+    .goals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .goal-pill {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--green-tag-text);
+      background: var(--green-tag);
+      border-radius: 20px;
+      padding: 5px 14px;
+      width: fit-content;
+    }
+    /* Pains */
+    .pains-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pain-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .pain-bar {
+      width: 3px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: #ef4444;
+      margin-top: 3px;
+    }
+    .pain-text {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    /* Bullet list - fears & concerns */
+    .bullet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-left: 4px;
+    }
+    .bullet-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    .bullet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-soft);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+    /* Scroll nav dots */
+    .scroll-nav {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(13,31,60,0.2);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .nav-dot:hover {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+  </style>
+  </head>
+  <body>
+    <!-- -- Scroll nav dots (one per persona) --------------------------- -->
+    <nav class="scroll-nav">
+      <a class="nav-dot" href="#persona-1" title="Persona 1"></a>
+      <a class="nav-dot" href="#persona-2" title="Persona 2"></a>
+      <!-- INSERT: add more nav dots as more personas are added -->
+    </nav>
+    <div class="page">
+
+      <!-- ================================================================ PERSONA 1 ================================================================ -->
+      <div class="persona-card" id="persona-1">
+        <!-- -- LEFT PANEL ------------------------------------------------ -->
+        <div class="panel-left">
+          <div class="avatar">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="16" r="8" fill="white"/>
+              <ellipse cx="20" cy="34" rx="13" ry="8" fill="white"/>
+            </svg>
+          </div>
+          <!-- Persona Name -->
+          <h2 class="persona-name">
+            <span class="insert-name">INSERT: persona 1 name e.g. "Bailey"</span>
+          </h2>
+          <!-- Role label (user type) -->
+          <p class="persona-role">
+            <span class="insert-dark">INSERT: persona 1 role label e.g. "End Customer"</span>
+          </p>
+          <!-- Context Snapshot - how they work, style, approach (no demographics) -->
+          <p class="persona-quote">
+            <span class="insert-dark">INSERT: persona 1 context snapshot - 2-4 sentences on how they operate, work style, decision-making approach. No demographics.</span>
+          </p>
+          <!-- Type badge -->
+          <div class="type-badge">
+            <span class="insert-dark">INSERT: persona 1 type badge</span>
+          </div>
+          <!-- Meta: Industry / Domain -->
+          <div class="meta-block">
+            <p class="meta-label">Industry</p>
+            <p class="meta-value">
+              <span class="insert-dark">INSERT: persona 1 industry / domain</span>
+            </p>
+          </div>
+          <!-- Meta: Tech Comfort -->
+          <div class="meta-block">
+            <p class="meta-label">Tech Comfort</p>
+            <p class="meta-value">
+              <span class="insert-dark">INSERT: persona 1 tech comfort level</span>
+            </p>
+          </div>
+          <!-- Meta: Primary Device -->
+          <div class="meta-block">
+            <p class="meta-label">Primary Device</p>
+            <p class="meta-value">
+              <span class="insert-dark">INSERT: persona 1 primary device</span>
+            </p>
+          </div>
+        </div>
+        <!-- -- RIGHT PANEL ----------------------------------------------- -->
+        <div class="panel-right">
+          <!-- 1. **Goals & Needs (1-5 items - one or many, each one line)** -->
+          <section>
+            <p class="section-label">Goals &amp; Needs</p>
+            <div class="goals-list">
+              <span class="goal-pill"><span class="insert-tag">INSERT: persona 1, goal / need 1 - one line, a real need this solves for them</span></span>
+              <span class="goal-pill"><span class="insert-tag">INSERT: persona 1, goal / need 2 - one line, a real need this solves for them</span></span>
+              <!-- **add or remove goal-pill spans above; 1 is enough if there's only one real need, add more if several apply** -->
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 2. Daily Responsibilities (4-6 items) - the real flow, start to finish -->
+          <section>
+            <p class="section-label">Daily Responsibilities</p>
+            <div class="bar-list">
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 1, responsibility / step 1</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 1, responsibility / step 2</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 1, responsibility / step 3</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 1, responsibility / step 4</span></p></div>
+              <!-- add more bar-items above if 5-6 steps exist -->
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 3. Biggest Frustrations + What Success Looks Like (side by side) -->
+          <section>
+            <div class="two-col">
+              <!-- Biggest Frustrations (3-4 items) -->
+              <div>
+                <p class="section-label">Biggest Frustrations</p>
+                <div class="pains-list">
+                  <div class="pain-item"><div class="pain-bar"></div><p class="pain-text"><span class="insert">INSERT: persona 1, frustration 1</span></p></div>
+                  <div class="pain-item"><div class="pain-bar"></div><p class="pain-text"><span class="insert">INSERT: persona 1, frustration 2</span></p></div>
+                  <div class="pain-item"><div class="pain-bar"></div><p class="pain-text"><span class="insert">INSERT: persona 1, frustration 3</span></p></div>
+                  <!-- add more pain-items above if 4 frustrations exist -->
+                </div>
+              </div>
+              <!-- What Success Looks Like (1-2 items) -->
+              <div>
+                <p class="section-label">What Success Looks Like</p>
+                <div class="bar-list">
+                  <div class="bar-item"><div class="bar-accent bar-green"></div><p class="bar-text"><span class="insert">INSERT: persona 1, success - the outcome in their own words</span></p></div>
+                  <!-- add a second bar-item above only if a second success signal is needed -->
+                </div>
+              </div>
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 4. How They Make Decisions (2-4 items) -->
+          <!-- **SYNTAX (required for every item): [Decision/Action] + by/using + [Information needed]** -->
+          <!-- **e.g. "Approves the invoice by checking it matches the purchase order"** -->
+          <section>
+            <p class="section-label">How They Make Decisions</p>
+            <div class="bar-list">
+              <div class="bar-item"><div class="bar-accent bar-blue"></div><p class="bar-text"><span class="insert">INSERT: persona 1, [decision/action] by/using [information needed] 1</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-blue"></div><p class="bar-text"><span class="insert">INSERT: persona 1, [decision/action] by/using [information needed] 2</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-blue"></div><p class="bar-text"><span class="insert">INSERT: persona 1, [decision/action] by/using [information needed] 3</span></p></div>
+              <!-- add more bar-items above if 4 decision drivers exist -->
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 5. What's at Risk (2-3 items) - worst fear + who's affected -->
+          <section>
+            <p class="section-label">What&rsquo;s at Risk</p>
+            <div class="bullet-list">
+              <div class="bullet-item"><div class="bullet-dot"></div><span><span class="insert">INSERT: persona 1, worst fear</span></span></div>
+              <div class="bullet-item"><div class="bullet-dot"></div><span><span class="insert">INSERT: persona 1, who's affected if it happens</span></span></div>
+            </div>
+          </section>
+        </div>
+      </div><!-- /persona-card 1 -->
+      <!-- ================================================================ PERSONA 2 ================================================================ -->
+      <div class="persona-card" id="persona-2">
+        <!-- -- LEFT PANEL ------------------------------------------------ -->
+        <div class="panel-left">
+          <div class="avatar">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="16" r="8" fill="white"/>
+              <ellipse cx="20" cy="34" rx="13" ry="8" fill="white"/>
+            </svg>
+          </div>
+          <!-- Persona Name -->
+          <h2 class="persona-name">
+            <span class="insert-name">INSERT: persona 2 name e.g. "Bailey"</span>
+          </h2>
+          <!-- Role label (user type) -->
+          <p class="persona-role">
+            <span class="insert-dark">INSERT: persona 2 role label e.g. "End Customer"</span>
+          </p>
+          <!-- Context Snapshot - how they work, style, approach (no demographics) -->
+          <p class="persona-quote">
+            <span class="insert-dark">INSERT: persona 2 context snapshot - 2-4 sentences on how they operate, work style, decision-making approach. No demographics.</span>
+          </p>
+          <!-- Type badge -->
+          <div class="type-badge">
+            <span class="insert-dark">INSERT: persona 2 type badge</span>
+          </div>
+          <!-- Meta: Industry / Domain -->
+          <div class="meta-block">
+            <p class="meta-label">Industry</p>
+            <p class="meta-value">
+              <span class="insert-dark">INSERT: persona 2 industry / domain</span>
+            </p>
+          </div>
+          <!-- Meta: Tech Comfort -->
+          <div class="meta-block">
+            <p class="meta-label">Tech Comfort</p>
+            <p class="meta-value">
+              <span class="insert-dark">INSERT: persona 2 tech comfort level</span>
+            </p>
+          </div>
+          <!-- Meta: Primary Device -->
+          <div class="meta-block">
+            <p class="meta-label">Primary Device</p>
+            <p class="meta-value">
+              <span class="insert-dark">INSERT: persona 2 primary device</span>
+            </p>
+          </div>
+        </div>
+        <!-- -- RIGHT PANEL ----------------------------------------------- -->
+        <div class="panel-right">
+          <!-- 1. **Goals & Needs (1-5 items - one or many, each one line)** -->
+          <section>
+            <p class="section-label">Goals &amp; Needs</p>
+            <div class="goals-list">
+              <span class="goal-pill"><span class="insert-tag">INSERT: persona 2, goal / need 1 - one line, a real need this solves for them</span></span>
+              <span class="goal-pill"><span class="insert-tag">INSERT: persona 2, goal / need 2 - one line, a real need this solves for them</span></span>
+              <!-- **add or remove goal-pill spans above; 1 is enough if there's only one real need, add more if several apply** -->
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 2. Daily Responsibilities (4-6 items) - the real flow, start to finish -->
+          <section>
+            <p class="section-label">Daily Responsibilities</p>
+            <div class="bar-list">
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 2, responsibility / step 1</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 2, responsibility / step 2</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 2, responsibility / step 3</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-gold"></div><p class="bar-text"><span class="insert">INSERT: persona 2, responsibility / step 4</span></p></div>
+              <!-- add more bar-items above if 5-6 steps exist -->
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 3. Biggest Frustrations + What Success Looks Like (side by side) -->
+          <section>
+            <div class="two-col">
+              <!-- Biggest Frustrations (3-4 items) -->
+              <div>
+                <p class="section-label">Biggest Frustrations</p>
+                <div class="pains-list">
+                  <div class="pain-item"><div class="pain-bar"></div><p class="pain-text"><span class="insert">INSERT: persona 2, frustration 1</span></p></div>
+                  <div class="pain-item"><div class="pain-bar"></div><p class="pain-text"><span class="insert">INSERT: persona 2, frustration 2</span></p></div>
+                  <div class="pain-item"><div class="pain-bar"></div><p class="pain-text"><span class="insert">INSERT: persona 2, frustration 3</span></p></div>
+                  <!-- add more pain-items above if 4 frustrations exist -->
+                </div>
+              </div>
+              <!-- What Success Looks Like (1-2 items) -->
+              <div>
+                <p class="section-label">What Success Looks Like</p>
+                <div class="bar-list">
+                  <div class="bar-item"><div class="bar-accent bar-green"></div><p class="bar-text"><span class="insert">INSERT: persona 2, success - the outcome in their own words</span></p></div>
+                  <!-- add a second bar-item above only if a second success signal is needed -->
+                </div>
+              </div>
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 4. How They Make Decisions (2-4 items) -->
+          <!-- **SYNTAX (required for every item): [Decision/Action] + by/using + [Information needed]** -->
+          <!-- **e.g. "Approves the invoice by checking it matches the purchase order"** -->
+          <section>
+            <p class="section-label">How They Make Decisions</p>
+            <div class="bar-list">
+              <div class="bar-item"><div class="bar-accent bar-blue"></div><p class="bar-text"><span class="insert">INSERT: persona 2, [decision/action] by/using [information needed] 1</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-blue"></div><p class="bar-text"><span class="insert">INSERT: persona 2, [decision/action] by/using [information needed] 2</span></p></div>
+              <div class="bar-item"><div class="bar-accent bar-blue"></div><p class="bar-text"><span class="insert">INSERT: persona 2, [decision/action] by/using [information needed] 3</span></p></div>
+              <!-- add more bar-items above if 4 decision drivers exist -->
+            </div>
+          </section>
+          <hr class="section-divider" />
+          <!-- 5. What's at Risk (2-3 items) - worst fear + who's affected -->
+          <section>
+            <p class="section-label">What&rsquo;s at Risk</p>
+            <div class="bullet-list">
+              <div class="bullet-item"><div class="bullet-dot"></div><span><span class="insert">INSERT: persona 2, worst fear</span></span></div>
+              <div class="bullet-item"><div class="bullet-dot"></div><span><span class="insert">INSERT: persona 2, who's affected if it happens</span></span></div>
+            </div>
+          </section>
+        </div>
+      </div><!-- /persona-card 2 -->
+      <!--
+      TO ADD MORE PERSONAS: duplicate an entire .persona-card block,
+      increment the number in id="persona-N" and all INSERT comments
+      inside. Also add a matching nav dot in the scroll-nav element.
+
+      SECTIONS PER PERSONA (in order):
+      LEFT PANEL
+        Persona name (first letter must match first letter of role)
+        Role label (user type)
+        Context Snapshot (how they work, no demographics)
+        Type badge
+        Industry / Domain
+        Tech Comfort
+        Primary Device
+
+      RIGHT PANEL (in order, all required):
+        1. **Goals & Needs - 1 or more items, one line each, green pill(s)
+           Can be a single core need or several - don't force it to 1.**
+        2. Daily Responsibilities - 4 to 6 items, gold bar
+           The real flow they follow, start to finish.
+        3. Biggest Frustrations (red bar) + What Success Looks Like
+           (green bar) - side by side in .two-col
+        4. How They Make Decisions - 2 to 4 items, blue bar
+           **SYNTAX: [Decision/Action] + by/using + [Information needed]
+           e.g. "Approves the invoice by checking it matches the PO"**
+        5. What's at Risk - 2 to 3 items, bullet dots
+           Worst fear first, then who's affected.
+
+      NOTES:
+      - Tools Relied On has been removed from this skeleton.
+      - Biggest Frustrations and What Success Looks Like always sit
+        side by side in .two-col.
+      - **Goals & Needs is flexible in count - one item is fine if that's
+        the only real need; don't pad it out artificially.**
+      - **Every "How They Make Decisions" item must follow the
+        [Decision/Action] by/using [Information needed] syntax.**
+      - No demographic storytelling in Context Snapshot.
+      -->
+    </div><!-- /page -->
+  </body>
+</html>
