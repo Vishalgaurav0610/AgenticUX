@@ -1,0 +1,455 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Content Strategy &amp; Design</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy-deep:#0d1f3c;--navy-row:#1a2e55;--navy-light:#1c3257;
+  --indigo:#3d5a99;--indigo-lt:#dce6f5;--indigo-xlt:#eef3fb;
+  --border:#dde4f0;--border-dark:rgba(255,255,255,0.1);
+  --text-white:#fff;--text-light:rgba(255,255,255,0.75);--text-muted:rgba(255,255,255,0.45);
+  --text-dark:#0f172a;--text-mid:#334155;--text-soft:#64748b;
+  --bg-page:#f8fafc;--bg-white:#fff;
+  --font-head:'DM Sans',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+body{font-family:var(--font-body);background:var(--bg-page);color:var(--text-dark);line-height:1.6;-webkit-font-smoothing:antialiased}
+/* INSERT */
+.insert{display:inline-block;font-size:10.5px;font-weight:500;font-style:italic;color:#3b6ea8;background:#e8f0fb;border:1px dashed #7aaade;border-radius:4px;padding:3px 8px}
+.insert-dark{display:inline-block;font-size:10.5px;font-weight:500;font-style:italic;color:#90b8e8;background:rgba(255,255,255,.07);border:1px dashed rgba(144,184,232,.5);border-radius:4px;padding:3px 8px}
+/* PAGE */
+.page{max-width:1040px;margin:0 auto;background:var(--bg-white);box-shadow:0 0 0 1px var(--border),0 4px 28px rgba(13,31,60,.09);border-radius:6px;overflow:hidden}
+/* HERO */
+.hero{background:var(--navy-deep)}
+.hero-stripe{height:4px;background:linear-gradient(90deg,var(--indigo) 0%,#4f6fad 55%,transparent 100%)}
+.hero-body{padding:52px 60px 44px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.hero-tag{font-family:var(--font-body);font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#4f6fad;margin-bottom:18px}
+.hero h1{font-family:var(--font-head);font-size:38px;font-weight:700;color:var(--text-white);letter-spacing:-.02em;line-height:1.05;margin-bottom:10px}
+.hero-sub{font-family:var(--font-body);font-size:12.5px;font-weight:300;color:rgba(255,255,255,.8);line-height:1.7;max-width:420px}
+.hero-meta{text-align:right;flex-shrink:0}
+.hero-meta-item{margin-bottom:14px}
+.hero-meta-item:last-child{margin-bottom:0}
+.hml{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:3px}
+.hmv{font-family:var(--font-head);font-size:13px;font-weight:600;color:rgba(255,255,255,.88)}
+.hero-rule{height:1px;background:rgba(255,255,255,.07);margin:0 60px}
+.hero-foot{padding:16px 60px;display:flex;justify-content:space-between}
+.hero-foot span{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#d5d5d5}
+/* NOTES */
+.guidelines-note{background:#fffbeb;border-left:3px solid #f59e0b;padding:10px 20px;font-family:var(--font-mono);font-size:10px;color:#92400e;border-bottom:1px solid var(--border)}
+/* SECTION */
+.section{border-bottom:1px solid var(--border)}
+.section:last-child{border-bottom:none}
+.sec-hdr{display:flex;align-items:stretch;border-bottom:1px solid var(--border)}
+.sec-num{width:52px;flex-shrink:0;background:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:12px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.04em}
+.sec-title-wrap{flex:1;padding:18px 36px;background:var(--navy-row);display:flex;align-items:center}
+.sec-title{font-family:var(--font-head);font-size:15px;font-weight:600;color:var(--text-white);letter-spacing:-.01em}
+.sec-body{padding:28px 36px 36px}
+/* SUB HEADING */
+.sub-h{font-family:var(--font-head);font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--indigo);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--indigo-lt);margin-top:24px}
+.sub-h:first-child{margin-top:0}
+/* CONTEXT ANALYSIS BLOCK */
+.context-block{background:var(--navy-deep);border-radius:4px;padding:24px 28px;margin-bottom:20px}
+.context-label{font-family:var(--font-body);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px}
+.context-text{font-family:var(--font-head);font-size:14px;font-weight:500;color:var(--text-white);line-height:1.65;letter-spacing:-.01em;word-break:break-word}
+.context-ensure{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font-head);font-size:13px;font-weight:600;color:#90b8e8;line-height:1.5}
+/* SYSTEM CONTEXT GRID */
+.system-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.system-cell{padding:14px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.system-cell:nth-child(2n){border-right:none}
+.system-cell:nth-last-child(-n+2){border-bottom:none}
+.system-cell-label{font-family:var(--font-mono);font-size:9px;font-weight:600;color:var(--indigo);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.system-cell-body{font-size:12px;color:var(--text-mid);line-height:1.6;word-break:break-word}
+/* TABLES */
+.tbl-wrap{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.dt{width:100%;border-collapse:collapse;font-family:var(--font-body);font-size:12px}
+.dt thead tr{background:var(--navy-row)}
+.dt thead th{font-family:var(--font-head);font-size:9px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:9px 14px;text-align:left;border-right:1px solid rgba(255,255,255,.05)}
+.dt thead th:last-child{border-right:none}
+.dt tbody tr{border-bottom:1px solid var(--border)}
+.dt tbody tr:last-child{border-bottom:none}
+.dt tbody tr:nth-child(even){background:#f8fafc}
+.dt tbody td{padding:10px 14px;vertical-align:top;border-right:1px solid var(--border);color:var(--text-dark);line-height:1.5;word-break:break-word}
+.dt tbody td:last-child{border-right:none}
+.verify-flag{display:inline-block;font-family:var(--font-mono);font-size:8px;font-weight:700;color:#d97706;background:#fffbeb;border:1px solid #fde68a;border-radius:3px;padding:1px 5px;margin-left:4px}
+/* TONE RECOMMENDATION */
+.tone-rec{border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.tone-rec-body{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.tone-label{font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.tone-use{background:var(--indigo-xlt);border-left:3px solid var(--indigo);border-radius:0 4px 4px 0;padding:10px 14px}
+.tone-avoid{background:#fff5f5;border-left:3px solid #f87171;border-radius:0 4px 4px 0;padding:10px 14px}
+.tone-detail{font-size:12px;color:var(--text-mid);line-height:1.6}
+/* CONTENT HIERARCHY BLOCK */
+.hierarchy-block{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.hierarchy-row{display:flex;border-bottom:1px solid var(--border)}
+.hierarchy-row:last-child{border-bottom:none}
+.hierarchy-label{width:110px;flex-shrink:0;padding:12px 16px;font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--indigo);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center}
+.hierarchy-value{flex:1;padding:12px 16px;font-size:13px;color:var(--text-mid);line-height:1.6;border-left:1px solid var(--border);word-break:break-word}
+/* CONTENT ELEMENT CARD */
+.element-card{border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.element-card:last-child{margin-bottom:0}
+.element-hdr{background:var(--navy-row);padding:12px 18px;font-family:var(--font-head);font-size:13px;font-weight:600;color:var(--text-white)}
+.element-body{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.element-field-label{font-family:var(--font-mono);font-size:9px;font-weight:600;color:var(--indigo);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.element-content{font-size:13px;color:var(--text-dark);line-height:1.6;word-break:break-word}
+.state-variants{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.state-row{display:flex;border-bottom:1px solid var(--border)}
+.state-row:last-child{border-bottom:none}
+.state-label{width:90px;flex-shrink:0;padding:8px 12px;font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center}
+.state-label-default{color:var(--indigo);background:var(--indigo-xlt)}
+.state-label-error{color:#991b1b;background:#fef2f2}
+.state-label-success{color:#065f46;background:#ecfdf5}
+.state-label-empty{color:#6b7280;background:#f9fafb}
+.state-label-loading{color:#92400e;background:#fffbeb}
+.state-value{flex:1;padding:8px 12px;font-size:12px;color:var(--text-mid);line-height:1.5;border-left:1px solid var(--border);word-break:break-word}
+.element-aria{font-family:var(--font-mono);font-size:10px;color:var(--text-soft);background:#f8fafc;padding:8px 12px;border-radius:4px}
+/* COMPLIANCE STATUS */
+.compliance-pass{display:inline-block;font-family:var(--font-mono);font-size:8px;font-weight:700;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:3px;padding:1px 5px}
+.compliance-issue{display:inline-block;font-family:var(--font-mono);font-size:8px;font-weight:700;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;border-radius:3px;padding:1px 5px}
+/* BULLET LIST */
+.bullet-list{list-style:none;padding:0;margin:0}
+.bullet-list li{padding:6px 0 6px 18px;position:relative;font-size:13px;color:var(--text-mid);border-bottom:1px solid var(--border);word-break:break-word}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list li::before{content:'–';position:absolute;left:0;color:var(--indigo);font-weight:600}
+/* FOOTER */
+.footer{background:var(--navy-deep);padding:18px 36px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer span{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#d5d5d5}
+@media(max-width:720px){
+  .hero-body{flex-direction:column;padding:32px 24px 28px}
+  .hero-foot,.hero-rule{padding-left:24px;padding-right:24px}
+  .sec-body{padding:20px 18px 24px}
+  .sec-title-wrap{padding:16px 18px}
+  .system-grid{grid-template-columns:1fr}
+  .system-cell{border-right:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-body">
+    <div>
+      <p class="hero-tag">Content Strategy &amp; Design</p>
+      <h1>Content Strategy &amp; Design</h1>
+      <p class="hero-sub">Screen-level content strategy and production-ready UI content — strategically grounded, tonally correct, terminologically precise, and validated.</p>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hml">Component</span>
+        <span class="hmv"><span class="insert-dark">INSERT: component type e.g. "Appointment Booking Modal"</span></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hml">Screen</span>
+        <span class="hmv"><span class="insert-dark">INSERT: screen context</span></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hml">User</span>
+        <span class="hmv"><span class="insert-dark">INSERT: user type and scenario</span></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hml">Guidelines</span>
+        <span class="hmv"><span class="insert-dark">INSERT: "Applied" or "Not Available"</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-rule"></div>
+  <div class="hero-foot">
+    <span>Confidential</span>
+    <span>Internal Reference</span>
+  </div>
+</div>
+<!-- GUIDELINES NOTE — CONDITIONAL: present only when Content Guidelines are NOT available. Remove when guidelines are applied. -->
+<div class="guidelines-note">
+  Note: Content Guidelines not available. Tone, terminology, and accessibility decisions based on domain best practices. Establishing Content Guidelines is recommended for system-wide consistency.
+</div>
+<!-- SECTION 01 — CONTENT SYSTEM CONTEXT -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">01</div>
+    <div class="sec-title-wrap"><span class="sec-title">Content System Context</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="system-grid">
+      <div class="system-cell">
+        <div class="system-cell-label">Journey Position</div>
+        <div class="system-cell-body"><span class="insert">INSERT: where in the overall journey this screen sits</span></div>
+      </div>
+      <div class="system-cell">
+        <div class="system-cell-label">System Awareness</div>
+        <div class="system-cell-body"><span class="insert">INSERT: what the system knows about the user at this point</span></div>
+      </div>
+      <div class="system-cell">
+        <div class="system-cell-label">Upstream</div>
+        <div class="system-cell-body"><span class="insert">INSERT: what the user just completed or saw</span></div>
+      </div>
+      <div class="system-cell">
+        <div class="system-cell-label">Downstream</div>
+        <div class="system-cell-body"><span class="insert">INSERT: what happens next</span></div>
+      </div>
+      <div class="system-cell">
+        <div class="system-cell-label">User Awareness</div>
+        <div class="system-cell-body"><span class="insert">INSERT: what the user knows/expects at this point</span></div>
+      </div>
+      <div class="system-cell">
+        <div class="system-cell-label">Cross-System</div>
+        <div class="system-cell-body"><span class="insert">INSERT: consistency notes — other components/flows that share content patterns with this one</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SECTION 02 — CONTEXT ANALYSIS -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">02</div>
+    <div class="sec-title-wrap"><span class="sec-title">Context Analysis</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="context-block">
+      <div class="context-label">Experience Moment</div>
+      <div class="context-text">
+        <span class="insert-dark">INSERT: Context Analysis in proprietary pattern. "The [user type] is [task action] because [trigger/motivation]. They are at the [beginning / middle / end] of [task/flow]. Their emotional state is [emotion] because [reason]."</span>
+      </div>
+      <div class="context-ensure">
+        <span class="insert-dark">INSERT: "This experience must ensure: [key outcome]."</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SECTION 03 — TONE & TERMINOLOGY -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">03</div>
+    <div class="sec-title-wrap"><span class="sec-title">Tone &amp; Terminology</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="sub-h">Tone Recommendation</div>
+    <div class="tone-rec">
+      <div class="tone-rec-body">
+        <div class="tone-use">
+          <div class="tone-label">Use</div>
+          <p class="tone-detail"><span class="insert">INSERT: "Use [tone category from Content Guidelines] tone because [context from Context Analysis]."</span></p>
+        </div>
+        <div class="tone-avoid">
+          <div class="tone-label">Avoid</div>
+          <p class="tone-detail"><span class="insert">INSERT: "Avoid [tone] because [reason]."</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="sub-h">Terminology Compliance</div>
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th style="width:22%;">Use</th>
+            <th style="width:22%;">Not</th>
+            <th style="width:56%;">Rationale / Guidelines Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- INSERT: One row per term relevant to this component. Reference Content Guidelines canonical terms. -->
+          <tr>
+            <td><span class="insert">INSERT: approved term</span></td>
+            <td><span class="insert">INSERT: prohibited alternative</span></td>
+            <td><span class="insert">INSERT: rationale or Content Guidelines section reference</span></td>
+          </tr>
+          <tr>
+            <td><span class="insert">INSERT: term</span> <span class="verify-flag">VERIFY</span></td>
+            <td><span class="insert">INSERT: prohibited</span></td>
+            <td><span class="insert">INSERT: rationale — confirm canonical term</span></td>
+          </tr>
+          <!-- INSERT: Duplicate rows for all terms used in this component -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- SECTION 04 — CONTENT HIERARCHY -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">04</div>
+    <div class="sec-title-wrap"><span class="sec-title">Content Hierarchy</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="hierarchy-block">
+      <div class="hierarchy-row">
+        <div class="hierarchy-label">Primary</div>
+        <div class="hierarchy-value"><span class="insert">INSERT: what the user must know — essential information</span></div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-label">Action</div>
+        <div class="hierarchy-value"><span class="insert">INSERT: what the user must do → what happens when they do it</span></div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-label">Supporting</div>
+        <div class="hierarchy-value"><span class="insert">INSERT: information that helps the user decide</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SECTION 05 — CONTENT INVENTORY -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">05</div>
+    <div class="sec-title-wrap"><span class="sec-title">Content Inventory</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th style="width:25%;">Element</th>
+            <th style="width:40%;">Purpose</th>
+            <th style="width:35%;">Condition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- INSERT: One row per content element. Exhaustive — including all state variants, helper text, aria labels. -->
+          <tr>
+            <td><span class="insert">INSERT: element name</span></td>
+            <td><span class="insert">INSERT: purpose</span></td>
+            <td><span class="insert">INSERT: condition (when visible, state-dependent, always)</span></td>
+          </tr>
+          <tr>
+            <td><span class="insert">INSERT: element 2</span></td>
+            <td><span class="insert">INSERT: purpose</span></td>
+            <td><span class="insert">INSERT: condition</span></td>
+          </tr>
+          <!-- INSERT: Duplicate rows for ALL elements -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- SECTION 06 — CONTENT ELEMENTS (Production-Ready Content) -->
+<!-- The core deliverable. One card per inventoried element. All states covered. -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">06</div>
+    <div class="sec-title-wrap"><span class="sec-title">Content Elements</span></div>
+  </div>
+  <div class="sec-body">
+    <!-- ELEMENT CARD — Duplicate for each inventoried element -->
+    <div class="element-card">
+      <div class="element-hdr"><span class="insert-dark">INSERT: element name e.g. "Page Title"</span></div>
+      <div class="element-body">
+        <div>
+          <div class="element-field-label">Primary Text</div>
+          <p class="element-content"><span class="insert">INSERT: final production-ready content</span></p>
+        </div>
+        <div>
+          <div class="element-field-label">Secondary Text</div>
+          <p class="element-content"><span class="insert">INSERT: supporting content, or "N/A" if not applicable</span></p>
+        </div>
+        <div>
+          <div class="element-field-label">State Variants</div>
+          <div class="state-variants">
+            <div class="state-row">
+              <div class="state-label state-label-default">Default</div>
+              <div class="state-value"><span class="insert">INSERT: default state content</span></div>
+            </div>
+            <div class="state-row">
+              <div class="state-label state-label-error">Error</div>
+              <div class="state-value"><span class="insert">INSERT: error state content — specific to this element's failure mode</span></div>
+            </div>
+            <div class="state-row">
+              <div class="state-label state-label-success">Success</div>
+              <div class="state-value"><span class="insert">INSERT: success state content</span></div>
+            </div>
+            <div class="state-row">
+              <div class="state-label state-label-empty">Empty</div>
+              <div class="state-value"><span class="insert">INSERT: empty state content</span></div>
+            </div>
+            <div class="state-row">
+              <div class="state-label state-label-loading">Loading</div>
+              <div class="state-value"><span class="insert">INSERT: loading state content</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="element-field-label">Accessibility</div>
+          <p class="element-aria"><span class="insert">INSERT: aria-label or screen reader announcement</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="element-card">
+      <div class="element-hdr"><span class="insert-dark">INSERT: element 2 name</span></div>
+      <div class="element-body">
+        <div><div class="element-field-label">Primary Text</div><p class="element-content"><span class="insert">INSERT: content</span></p></div>
+        <div><div class="element-field-label">Secondary Text</div><p class="element-content"><span class="insert">INSERT: content or N/A</span></p></div>
+        <div>
+          <div class="element-field-label">State Variants</div>
+          <div class="state-variants">
+            <div class="state-row"><div class="state-label state-label-default">Default</div><div class="state-value"><span class="insert">INSERT: default</span></div></div>
+            <div class="state-row"><div class="state-label state-label-error">Error</div><div class="state-value"><span class="insert">INSERT: error</span></div></div>
+            <div class="state-row"><div class="state-label state-label-success">Success</div><div class="state-value"><span class="insert">INSERT: success</span></div></div>
+            <div class="state-row"><div class="state-label state-label-empty">Empty</div><div class="state-value"><span class="insert">INSERT: empty</span></div></div>
+            <div class="state-row"><div class="state-label state-label-loading">Loading</div><div class="state-value"><span class="insert">INSERT: loading</span></div></div>
+          </div>
+        </div>
+        <div><div class="element-field-label">Accessibility</div><p class="element-aria"><span class="insert">INSERT: aria-label</span></p></div>
+      </div>
+    </div>
+    <!-- INSERT: Duplicate element-card for ALL inventoried elements -->
+  </div>
+</div>
+<!-- SECTION 07 — ACCESSIBILITY NOTES -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">07</div>
+    <div class="sec-title-wrap"><span class="sec-title">Accessibility Notes</span></div>
+  </div>
+  <div class="sec-body">
+    <ul class="bullet-list">
+      <!-- INSERT: Screen-specific accessibility notes — screen reader flow, focus order, dynamic content announcements, cognitive load considerations -->
+      <li><span class="insert">INSERT: accessibility note 1 — specific to this component</span></li>
+      <li><span class="insert">INSERT: accessibility note 2</span></li>
+      <li><span class="insert">INSERT: accessibility note 3</span></li>
+      <!-- INSERT: Add notes as needed -->
+    </ul>
+  </div>
+</div>
+<!-- SECTION 08 — COMPLIANCE NOTES (Self-Validation) -->
+<!-- Built-in audit. Validates content against Content Guidelines and Context Analysis. -->
+<div class="section">
+  <div class="sec-hdr">
+    <div class="sec-num">08</div>
+    <div class="sec-title-wrap"><span class="sec-title">Compliance Notes</span></div>
+  </div>
+  <div class="sec-body">
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th style="width:22%;">Element</th>
+            <th style="width:15%;">Status</th>
+            <th style="width:63%;">Detail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- INSERT: One row per element. Status: Compliant or Issue (Missing/Inconsistent/Incorrect/Incomplete/Non-compliant). -->
+          <tr>
+            <td><span class="insert">INSERT: element name</span></td>
+            <td><span class="compliance-pass">Compliant</span></td>
+            <td><span class="insert">INSERT: tone matches guidelines, terminology correct, all states present</span></td>
+          </tr>
+          <tr>
+            <td><span class="insert">INSERT: element name</span></td>
+            <td><span class="compliance-issue">Issue</span></td>
+            <td><span class="insert">INSERT: issue type and detail e.g. "Incomplete — loading state not applicable for static element"</span></td>
+          </tr>
+          <!-- INSERT: One row per inventoried element -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <span>Content Strategy &amp; Design · Confidential</span>
+  <span>Internal Reference</span>
+</div>
+</div>
+</body>
+</html>
